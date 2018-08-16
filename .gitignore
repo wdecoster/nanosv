@@ -10,4 +10,4 @@ nanosv/utils/coverage.pyc
 venv/
 nanosv/utils/*.pyc
 nanosv/*.pyc
-.remote_sync.json
+.remote-sync.json
