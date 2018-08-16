@@ -118,4 +118,5 @@ def parse_svs():
 
     sys.stderr.write(time.strftime("%c") + " Busy with printing to vcf...\n")
     with cfutures.ProcessPoolExecutor(max_workers=NanoSV.opts_threads) as executor:
+        sys.stderr.write(time.strftime("%c") + " Let's do some parallel work here...\n")
         executor.map(process_variants, sorted(breakpoint.structural_variants))
