@@ -5,15 +5,12 @@ from os import path
 here = path.abspath(path.dirname(__file__))
 exec(open('nanosv/version.py').read())
 
-def readme():
-    with open('README.rst') as f:
-        return f.read()
-
 
 setup( name='NanoSV',
        version=__version__,
        description='Structural variation detection tool for Oxford Nanopore data.',
-       long_description=readme(),
+       long_description=open(path.join(here, "README.md")).read(),
+       long_description_content_type="text/markdown",
        classifiers=[
            'Development Status :: 4 - Beta',
            'Intended Audience :: Science/Research',
