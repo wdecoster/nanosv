@@ -119,4 +119,5 @@ def parse_svs():
         sys.stderr.write(time.strftime("%c") + " Let's do some parallel work here...\n")
         for sv in executor.map(process_variants, sorted(breakpoint.structural_variants)):
             if sv:
+                print(breakpoint.structural_variants[sv].pos)
                 breakpoint.structural_variants[sv].printVCF(c_vcf.vcf_writer)
