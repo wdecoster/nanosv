@@ -81,7 +81,7 @@ def process_variants(sv_id):
         breakpoint.structural_variants[sv_id].info['PHASING_SCORE'] = phasing_result[1]
         breakpoint.structural_variants[sv_id].info['SNPS_USED'] = phasing_result[3]
         breakpoint.structural_variants[sv_id].info['PHASING_PVALUE'] = phasing_result[2]
-    breakpoint.structural_variants[sv_id].printVCF(c_vcf.vcf_writer)
+    return sv_id
 
 
 def parse_svs():
@@ -117,4 +117,6 @@ def parse_svs():
     sys.stderr.write(time.strftime("%c") + " Busy with printing to vcf...\n")
     with cfutures.ProcessPoolExecutor(max_workers=NanoSV.opts_threads) as executor:
         sys.stderr.write(time.strftime("%c") + " Let's do some parallel work here...\n")
-        executor.map(process_variants, sorted(breakpoint.structural_variants))
+        for sv in executor.map(process_variants, sorted(breakpoint.structural_variants)):
+            if sv:
+                breakpoint.structural_variants[sv].printVCF(c_vcf.vcf_writer)
